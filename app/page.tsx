@@ -81,7 +81,7 @@ export default function Home() {
           <div><b>{latestData.relevant_deduplicated_postings.toLocaleString()}</b><span>actual 2026 pilot records</span></div>
           <div><b>Open method</b><span>versioned taxonomy + QA</span></div>
         </div>
-        <p className="pilotNote">The live pilot below was collected in {latestData.snapshot_month} from {latestData.companies_covered} public employer job boards. It is actual data, but remains unaudited and source-panel biased; use it to review the method, not as a final market estimate.</p>
+        <p className="pilotNote">The corrected pilot below semantically evaluated {latestData.total_active_source_postings.toLocaleString()} active postings from {latestData.companies_covered} public employer job boards. It retained {latestData.relevant_deduplicated_postings} operational roles, including {latestData.india_relevant_postings} in India. This remains far below the 2023 India benchmark of 930 postings from 376 companies, so use it to review relevance—not as a market estimate.</p>
       </section>
 
       <section className="section dark" id="signals">

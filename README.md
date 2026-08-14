@@ -11,11 +11,11 @@ The project is designed as a repeatable monthly research publication. It separat
 - traditional DevOps, SRE and platform engineering from MLOps, LLMOps, AI infrastructure and agentic operations;
 - verified findings from actual but unaudited pilot data.
 
-The historical methodology is based on School of DevOps reports published between 2014 and 2023. The first 2026 pilot contains 1,426 normalized postings from eight public employer job boards. It is deliberately labeled unaudited because the initial source panel is not yet representative.
+The historical methodology is based on School of DevOps reports published between 2014 and 2023. The corrected August 2026 pilot semantically evaluates more than 6,600 active postings from 34 public employer job boards. It is deliberately labeled unaudited because the source panel is not yet representative, particularly for India.
 
 ## Data workflow
 
-`pipeline/collect.py` reads the approved source register in `data/sources.json`, collects public postings, normalizes and deduplicates records, applies the versioned taxonomy, and writes a frozen monthly snapshot. Full job descriptions are not republished; records retain source links, hashes, classification evidence and extracted signals.
+`pipeline/collect.py` reads the approved source register in `data/sources.json`, collects public postings, normalizes and deduplicates records, and performs hybrid semantic retrieval against positive role definitions and negative occupation examples. A conservative title boundary prevents generic research, customer success, sales and application-development jobs from entering merely because their descriptions mention cloud or infrastructure. Full job descriptions are not republished; records retain source links, hashes, semantic scores, classification evidence and extracted signals.
 
 The monthly GitHub Action runs on the first day of each month. Each snapshot includes:
 
@@ -24,7 +24,7 @@ The monthly GitHub Action runs on the first day of each month. Each snapshot inc
 - source coverage and disclosures;
 - a deterministic stratified 10% human-audit queue.
 
-Review workbook: [DevOps Skills Index 2026 — Monthly Data Review](https://docs.google.com/spreadsheets/d/1T37fdasLRmQCO79MsSYJaZoX7keslZdD5ZLclRmqRAA/edit)
+Review workbook: [DevOps Skills Index 2026 — Corrected Semantic Pilot Review](https://docs.google.com/spreadsheets/d/1UmPSeFHqa5jeASbtyBwLz9RrP6G-mvXcUl8zex0Luno/edit)
 
 ## Website
 
@@ -51,4 +51,4 @@ npm run build:pages  # Static GitHub Pages export to out/
 
 ## Research status
 
-The current website displays the actual August 2026 pilot and labels it unaudited. Complete the audit queue and broaden the source panel before announcing the snapshot as a representative market report.
+The current website displays the actual corrected August 2026 pilot and labels it unaudited. The 2023 workbook contained 930 India postings from 376 companies and 3,576 worldwide postings from 1,626 companies; those figures are coverage benchmarks, not directly comparable trend points. Complete the audit queue and broaden the India and services-company source panels before announcing the snapshot as a representative market report.
