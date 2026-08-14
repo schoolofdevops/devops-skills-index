@@ -1,15 +1,19 @@
-import argparse, collections, datetime as dt, hashlib, html, json, math, pathlib, re, subprocess
+import argparse, collections, concurrent.futures, datetime as dt, hashlib, html, json, math, pathlib, re, subprocess
 from semantic import MODEL_NAME, SemanticRoleMatcher
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 AI_SKILLS = {"MLOps","LLMOps","Agentic systems","LLM / GenAI","RAG / Vector data","AI evaluation & safety","AI infrastructure","AI platform tools","Cloud AI services"}
-EXCLUDED_TITLE_PATTERNS = re.compile(r"\b(customer success|account executive|sales|marketing|recruit|talent|research scientist|data scientist|product manager|product owner|project manager|program manager|business analyst|financial analyst|legal|counsel|designer|design engineer|technical services|solutions engineer|information systems|skillbridge|workplace|support intern)\b",re.I)
+EXCLUDED_TITLE_PATTERNS = re.compile(r"\b(customer success|account executive|sales|marketing|recruit|talent|research scientist|data scientist|product manager|product owner|project manager|program manager|business analyst|financial analyst|legal|counsel|designer|design engineer|technical services|solutions engineer|information systems|skillbridge|workplace|support intern|embedded systems|workstation platform|mobile platform|defect equipment|metrology)\b|software engineer\s*\[data engineer",re.I)
 DIRECT_ROLE_TITLE = re.compile(r"\b(devops|devsecops|site reliability|sre|platform engineer|platform engineering|mlops|llmops|machine learning platform|ai platform|cloud platform engineer|cloud infrastructure engineer)\b",re.I)
 ADJACENT_ROLE_TITLE = re.compile(r"\b(reliability|infrastructure|cloud engineer|production engineer|systems engineer|release engineer|build engineer|deployment engineer|developer productivity|developer experience|observability engineer|kubernetes engineer|gpu infrastructure|inference platform|model serving)\b",re.I)
 OPERATIONAL_ANCHORS = ["production systems","production infrastructure","on-call","on call","incident response","infrastructure as code","ci/cd","continuous delivery","kubernetes","cloud infrastructure","service reliability","site reliability","devops","deployment automation","platform engineering","model serving","mlops","llmops","gpu infrastructure"]
 
 def fetch(url):
     response=subprocess.run(["curl","--fail","--silent","--show-error","--location","--max-time","60","--user-agent","SchoolOfDevOps-Skills-Research/1.1 (+https://github.com/schoolofdevops/devops-skills-index)",url],check=True,capture_output=True,text=True)
+    return json.loads(response.stdout)
+
+def fetch_post(url,payload):
+    response=subprocess.run(["curl","--fail","--silent","--show-error","--location","--max-time","60","--user-agent","SchoolOfDevOps-Skills-Research/1.1 (+https://github.com/schoolofdevops/devops-skills-index)","--header","Content-Type: application/json","--request","POST","--data",json.dumps(payload),url],check=True,capture_output=True,text=True)
     return json.loads(response.stdout)
 
 def plain(value):
@@ -60,6 +64,33 @@ def normalize_source_jobs(src):
             if country and country.lower() not in location.lower(): location=", ".join(x for x in [location,region_name,country] if x)
             rows.append({"provider_job_id":str(job.get("id")),"title":plain(job.get("title")),"location":location,"url":job.get("jobUrl"),"updated_at":job.get("publishedAt"),"body":plain(job.get("descriptionPlain") or job.get("descriptionHtml"))})
         return rows,len(rows)
+    if src["provider"]=="workday":
+        base=f"https://{src['host']}/wday/cxs/{src['tenant']}/{src['site']}"
+        active_count=fetch_post(f"{base}/jobs",{"appliedFacets":{},"limit":1,"offset":0,"searchText":""}).get("total",0)
+        search_terms=["DevOps","site reliability","platform engineer","cloud infrastructure","production engineer","release engineer","MLOps","AI platform"]
+        def search_page(term,offset=0):
+            return term,fetch_post(f"{base}/jobs",{"appliedFacets":{},"limit":20,"offset":offset,"searchText":term})
+        listings={}; remaining=[]
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+            first_pages=list(pool.map(search_page,search_terms))
+            for term,page in first_pages:
+                for listing in page.get("jobPostings",[]): listings[listing.get("externalPath")]=listing
+                remaining.extend((term,offset) for offset in range(20,min(page.get("total",0),100),20))
+            futures=[pool.submit(search_page,term,offset) for term,offset in remaining]
+            for future in concurrent.futures.as_completed(futures):
+                _,page=future.result()
+                for listing in page.get("jobPostings",[]): listings[listing.get("externalPath")]=listing
+        candidates=[(path,listing) for path,listing in listings.items() if path and not EXCLUDED_TITLE_PATTERNS.search(plain(listing.get("title"))) and (DIRECT_ROLE_TITLE.search(plain(listing.get("title"))) or ADJACENT_ROLE_TITLE.search(plain(listing.get("title"))))]
+        def workday_detail(item):
+            path,listing=item; return path,listing,fetch(f"{base}{path}")
+        rows=[]
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+          details=list(pool.map(workday_detail,candidates))
+        for path,listing,detail in details:
+            title=plain(listing.get("title"))
+            info=detail.get("jobPostingInfo") or {}
+            rows.append({"provider_job_id":plain(" ".join(listing.get("bulletFields") or [])) or path.rsplit("_",1)[-1],"title":title,"location":plain(info.get("location") or listing.get("locationsText")),"url":info.get("externalUrl") or f"https://{src['host']}/{src['site']}{path}","updated_at":info.get("startDate") or listing.get("postedOn"),"body":plain(info.get("jobDescription"))})
+        return rows,active_count
     raise ValueError(f"Unsupported provider: {src['provider']}")
 
 def seniority(title,body):

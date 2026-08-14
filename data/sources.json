@@ -1,4 +1,11 @@
 [
+  {"company":"Mastercard","provider":"workday","host":"mastercard.wd1.myworkdayjobs.com","tenant":"mastercard","site":"CorporateCareers","company_type":"Payments / financial services GCC","target_market":"India + Worldwide"},
+  {"company":"Salesforce","provider":"workday","host":"salesforce.wd12.myworkdayjobs.com","tenant":"salesforce","site":"External_Career_Site","company_type":"Enterprise SaaS / GCC","target_market":"India + Worldwide"},
+  {"company":"Micron Technology","provider":"workday","host":"micron.wd1.myworkdayjobs.com","tenant":"micron","site":"External","company_type":"Semiconductor / India GCC","target_market":"India + Worldwide"},
+  {"company":"PayPal","provider":"workday","host":"paypal.wd1.myworkdayjobs.com","tenant":"paypal","site":"jobs","company_type":"Payments / fintech GCC","target_market":"India + Worldwide"},
+  {"company":"Intel","provider":"workday","host":"intel.wd1.myworkdayjobs.com","tenant":"intel","site":"External","company_type":"Semiconductor / India GCC","target_market":"India + Worldwide"},
+  {"company":"HP","provider":"workday","host":"hp.wd5.myworkdayjobs.com","tenant":"hp","site":"ExternalCareerSite","company_type":"Enterprise technology / India GCC","target_market":"India + Worldwide"},
+  {"company":"Broadcom","provider":"workday","host":"broadcom.wd1.myworkdayjobs.com","tenant":"broadcom","site":"External_Career","company_type":"Semiconductor and infrastructure software / GCC","target_market":"India + Worldwide"},
   {"company":"Bosch Group","provider":"smartrecruiters","token":"BoschGroup","company_type":"Industrial manufacturing / GCC","target_market":"India + Worldwide"},
   {"company":"NielsenIQ","provider":"smartrecruiters","token":"NielsenIQ","company_type":"Data analytics / GCC","target_market":"India + Worldwide"},
   {"company":"Western Digital","provider":"smartrecruiters","token":"WesternDigital","company_type":"Hardware / GCC","target_market":"India + Worldwide"},

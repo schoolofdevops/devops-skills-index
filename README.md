@@ -26,7 +26,7 @@ The monthly GitHub Action runs on the first day of each month. Each snapshot inc
 
 Candidate snapshots must pass the versioned gates in `data/coverage-gates.json` before replacing `public/data/latest.json`. The current India publication gate is 500 relevant postings from at least 150 companies; passing the gate still requires a relevance audit.
 
-Supported public ATS adapters: Greenhouse, Lever, SmartRecruiters and Ashby. `data/source-targets.json` tracks priority employers whose career systems still need compliant adapters.
+Supported public ATS adapters: Greenhouse, Lever, SmartRecruiters, Ashby and Workday. Workday collection uses targeted operational-role searches before semantic screening so large enterprise boards remain practical to sample. `data/source-targets.json` tracks priority employers whose career systems still need compliant adapters.
 
 Review workbook: [DevOps Skills Index 2026 — Corrected Semantic Pilot Review](https://docs.google.com/spreadsheets/d/1UmPSeFHqa5jeASbtyBwLz9RrP6G-mvXcUl8zex0Luno/edit)
 
@@ -55,4 +55,4 @@ npm run build:pages  # Static GitHub Pages export to out/
 
 ## Research status
 
-The current website displays the actual corrected August 2026 pilot and labels it unaudited. The 2023 workbook contained 930 India postings from 376 companies and 3,576 worldwide postings from 1,626 companies; those figures are coverage benchmarks, not directly comparable trend points. Complete the audit queue and broaden the India and services-company source panels before announcing the snapshot as a representative market report.
+The current website displays the actual corrected August 2026 pilot and labels it unaudited. The unpublished iteration-two candidate now screens 21,253 active postings across 49 employers and retains 282 operationally relevant jobs, including 70 India jobs from 18 employers. It does not pass the India publication gate, so it has not replaced the live pilot. The 2023 workbook contained 930 India postings from 376 companies and 3,576 worldwide postings from 1,626 companies; those figures are coverage benchmarks, not directly comparable trend points. Complete the audit queue and broaden the India and services-company source panels before announcing the snapshot as a representative market report.
