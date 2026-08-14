@@ -1,25 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import latestData from "../public/data/latest.json";
 
-const roles = [
-  { name: "DevOps Engineer", share: 31, change: -4, tone: "blue" },
-  { name: "Platform Engineer", share: 24, change: 7, tone: "violet" },
-  { name: "Site Reliability Engineer", share: 21, change: 2, tone: "green" },
-  { name: "Cloud / Infrastructure", share: 13, change: -1, tone: "amber" },
-  { name: "MLOps / AI Platform", share: 8, change: 11, tone: "pink" },
-  { name: "LLMOps / Agentic Ops", share: 3, change: 18, tone: "red" },
-];
+const roleTones = ["blue", "violet", "green", "amber", "pink", "red"];
+const roles = Object.entries(latestData.role_families).map(([name, count], index) => ({ name, count, share: Math.round((count / latestData.relevant_deduplicated_postings) * 1000) / 10, tone: roleTones[index % roleTones.length] }));
 
-const skills = [
-  ["Kubernetes", "Containers", 64, 4], ["AWS", "Cloud", 61, 1],
-  ["Terraform / OpenTofu", "Infrastructure as code", 58, 6], ["Python", "Programming", 52, 8],
-  ["CI/CD", "Delivery", 49, -2], ["Linux", "Systems", 47, -3],
-  ["Observability", "Reliability", 43, 9], ["GitOps", "Delivery", 31, 7],
-  ["Security / policy as code", "DevSecOps", 28, 10], ["LLM serving & evaluation", "AI operations", 17, 22],
-] as const;
+const skills = Object.entries(latestData.skills).slice(0, 10).map(([name, count]) => ({ name, count, share: Math.round((count / latestData.relevant_deduplicated_postings) * 1000) / 10 }));
 
-const months = [42, 47, 45, 53, 58, 61, 64, 68, 72, 75, 82, 89];
+const aiSignalCounts = Object.values(latestData.ai_signals);
 const seniority = [
   { level: "Entry", value: 14, note: "Linux, Git, cloud fundamentals, scripting" },
   { level: "Mid-level", value: 43, note: "IaC, containers, CI/CD, observability" },
@@ -69,11 +58,9 @@ const framework = [
 ];
 
 export default function Home() {
-  const [region, setRegion] = useState("Worldwide");
   const [view, setView] = useState<"roles" | "skills">("roles");
   const [methodOpen, setMethodOpen] = useState(false);
-  const maxMonth = Math.max(...months);
-  const filteredSkills = useMemo(() => skills.map((s, i) => ({ ...s, 2: Math.max(8, s[2] + (region === "India" ? [3, -5, 5, 7, 2, 4, -2, 1, -1, -5][i] : 0)) })), [region]);
+  const maxAiSignal = Math.max(...aiSignalCounts);
 
   return (
     <main>
@@ -91,21 +78,21 @@ export default function Home() {
         <div className="scope">
           <div><b>4,504</b><span>historical postings examined</span></div>
           <div><b>2 markets</b><span>India + worldwide baseline</span></div>
-          <div><b>Monthly</b><span>proposed update cadence</span></div>
+          <div><b>{latestData.relevant_deduplicated_postings.toLocaleString()}</b><span>actual 2026 pilot records</span></div>
           <div><b>Open method</b><span>versioned taxonomy + QA</span></div>
         </div>
-        <p className="pilotNote">Pilot numbers below demonstrate the finished experience and are not yet a 2026 market sample. Historical counts come from your 2023 workbook.</p>
+        <p className="pilotNote">The live pilot below was collected in {latestData.snapshot_month} from {latestData.companies_covered} public employer job boards. It is actual data, but remains unaudited and source-panel biased; use it to review the method, not as a final market estimate.</p>
       </section>
 
       <section className="section dark" id="signals">
-        <div className="sectionHead inverse"><div><span className="kicker">01 / MARKET SIGNALS</span><h2>The role is fragmenting.<br/>The skill set is converging.</h2></div><div className="controls"><div className="segmented"><button className={region === "Worldwide" ? "active" : ""} onClick={() => setRegion("Worldwide")}>Worldwide</button><button className={region === "India" ? "active" : ""} onClick={() => setRegion("India")}>India</button></div><span className="period">Illustrative 2026 pilot</span></div></div>
+        <div className="sectionHead inverse"><div><span className="kicker">01 / MARKET SIGNALS</span><h2>The role is fragmenting.<br/>The skill set is converging.</h2></div><div className="controls"><span className="period">Actual pilot · {latestData.snapshot_month} · unaudited</span></div></div>
         <div className="featureGrid">
-          <article className="featureCard"><span className="label">FASTEST-RISING SIGNAL</span><h3>AI operations is becoming a skill layer before it becomes a job title.</h3><p>Track MLOps, LLMOps and agentic operations twice: as dedicated role families and as capabilities requested inside Platform, SRE and DevOps postings.</p><div className="bigStat">+22<span>pt</span></div><small>illustrative growth in AI-operations skill mentions</small></article>
-          <article className="chartCard"><div className="cardTop"><span className="label">AI-OPS SIGNAL INDEX</span><span>Jan → Dec</span></div><div className="spark" aria-label="Illustrative upward trend">{months.map((m, i) => <div key={i} className="bar" style={{height: `${(m/maxMonth)*100}%`}}><span>{i === months.length-1 ? m : ""}</span></div>)}</div><div className="axis"><span>Jan</span><span>Apr</span><span>Jul</span><span>Oct</span><span>Dec</span></div></article>
+          <article className="featureCard"><span className="label">EARLY AI SIGNAL</span><h3>AI operations appears more often as a capability than a dedicated title.</h3><p>LLM/GenAI appeared in {latestData.ai_signals["LLM / GenAI"]} pilot postings and agentic systems in {latestData.ai_signals["Agentic systems"]}. These counts require audit because this source panel includes AI-native employers.</p><div className="bigStat">{latestData.ai_signals["MLOps"] + latestData.ai_signals["LLMOps"]}<span> jobs</span></div><small>explicit MLOps or LLMOps mentions in this pilot</small></article>
+          <article className="chartCard"><div className="cardTop"><span className="label">AI SIGNAL COUNTS</span><span>one snapshot</span></div><div className="spark" aria-label="AI signal mention counts">{aiSignalCounts.map((count, i) => <div key={i} className="bar" style={{height: `${(count/maxAiSignal)*100}%`}}><span>{count}</span></div>)}</div><div className="axis"><span>LLM</span><span>Agentic</span><span>Safety</span><span>RAG</span><span>Other</span></div></article>
         </div>
         <div className="dataPanel">
-          <div className="panelTabs"><button className={view === "roles" ? "active" : ""} onClick={() => setView("roles")}>Role families</button><button className={view === "skills" ? "active" : ""} onClick={() => setView("skills")}>Top skills</button><span>Share of relevant postings · illustrative</span></div>
-          {view === "roles" ? <div className="roleRows">{roles.map((role, i) => <div className="roleRow" key={role.name}><span className="rank">{String(i+1).padStart(2,"0")}</span><b>{role.name}</b><div className="track"><i className={role.tone} style={{width: `${role.share*2.5}%`}} /></div><strong>{role.share}%</strong><span className={role.change >= 0 ? "up" : "down"}>{role.change >= 0 ? "↑" : "↓"} {Math.abs(role.change)}pt</span></div>)}</div> : <div className="roleRows">{filteredSkills.map((skill, i) => <div className="roleRow" key={skill[0]}><span className="rank">{String(i+1).padStart(2,"0")}</span><b>{skill[0]}<small>{skill[1]}</small></b><div className="track"><i className="green" style={{width: `${skill[2]*1.35}%`}} /></div><strong>{skill[2]}%</strong><span className={skill[3] >= 0 ? "up" : "down"}>{skill[3] >= 0 ? "↑" : "↓"} {Math.abs(skill[3])}pt</span></div>)}</div>}
+          <div className="panelTabs"><button className={view === "roles" ? "active" : ""} onClick={() => setView("roles")}>Role families</button><button className={view === "skills" ? "active" : ""} onClick={() => setView("skills")}>Top skills</button><span>Share of {latestData.relevant_deduplicated_postings.toLocaleString()} relevant pilot postings · unaudited</span></div>
+          {view === "roles" ? <div className="roleRows">{roles.map((role, i) => <div className="roleRow" key={role.name}><span className="rank">{String(i+1).padStart(2,"0")}</span><b>{role.name}<small>{role.count.toLocaleString()} postings</small></b><div className="track"><i className={role.tone} style={{width: `${role.share*1.45}%`}} /></div><strong>{role.share}%</strong><span className="period">pilot</span></div>)}</div> : <div className="roleRows">{skills.map((skill, i) => <div className="roleRow" key={skill.name}><span className="rank">{String(i+1).padStart(2,"0")}</span><b>{skill.name}<small>{skill.count.toLocaleString()} postings</small></b><div className="track"><i className="green" style={{width: `${skill.share*1.65}%`}} /></div><strong>{skill.share}%</strong><span className="period">pilot</span></div>)}</div>}
         </div>
       </section>
 
@@ -122,7 +109,7 @@ export default function Home() {
         <div className="trendHero"><div className="trendChart"><div className="trendChartTop"><span className="label">MONTHLY SERIES · 2026</span><span className="awaiting">● Awaiting first audited snapshot</span></div><div className="emptyPlot"><div className="gridLines"><i/><i/><i/><i/></div><div className="startMarker"><b>01</b><span>First verified<br/>data point</span></div><div className="futureLine"/><div className="futureDot d1"/><div className="futureDot d2"/><div className="futureDot d3"/></div><div className="monthAxis"><span>JAN</span><span>MAR</span><span>MAY</span><span>JUL</span><span>SEP</span><span>NOV</span></div></div><div className="trendRules"><span className="label">WHEN WE CALL IT A TREND</span><h3>Movement must be measurable, repeatable and sustained.</h3><ul><li><b>Comparable:</b> same core sources, query set and taxonomy version.</li><li><b>Material:</b> above a published minimum change threshold.</li><li><b>Persistent:</b> visible across multiple snapshots, not a one-month spike.</li><li><b>Qualified:</b> shown with sample size, coverage and confidence notes.</li></ul></div></div>
         <div className="seriesGrid">{trendSeries.map((series, i) => <article key={series.title}><div className="seriesHeader"><span>0{i+1}</span><i style={{background: series.color}}/></div><h3>{series.title}</h3><p>{series.description}</p><div className="miniPlot"><span/><span/><span/><span/><span/><span/></div></article>)}</div>
         <div className="trendViews"><span className="label">EVERY GRAPH CAN BE VIEWED AS</span><div><b>Share</b><span>How common is it?</span></div><div><b>Change</b><span>What moved this month?</span></div><div><b>Momentum</b><span>Is movement accelerating?</span></div><div><b>Persistence</b><span>Is the signal durable?</span></div><div><b>Co-occurrence</b><span>What travels with it?</span></div></div>
-        <div className="historyArchive"><div><span className="kicker">HISTORICAL REFERENCE</span><h3>The reports that came before.</h3><p>These editions provide useful context, but they will not be drawn as one continuous time series unless their samples and taxonomies can be reconciled. They remain available as source material and historical snapshots.</p></div><div className="historyList">{historicalReports.map((report, i) => <a href={report.href} target="_blank" rel="noreferrer" key={`${report.year}-${report.title}`}><span>{report.year}</span><div><b>{report.title}</b><small>{report.note}</small></div><i>↗</i></a>)}</div></div>
+        <div className="historyArchive"><div><span className="kicker">HISTORICAL REFERENCE</span><h3>The reports that came before.</h3><p>These editions provide useful context, but they will not be drawn as one continuous time series unless their samples and taxonomies can be reconciled. They remain available as source material and historical snapshots.</p></div><div className="historyList">{historicalReports.map((report) => <a href={report.href} target="_blank" rel="noreferrer" key={`${report.year}-${report.title}`}><span>{report.year}</span><div><b>{report.title}</b><small>{report.note}</small></div><i>↗</i></a>)}</div></div>
         <div className="comparisonModel"><div className="comparisonIntro"><span className="kicker">THE COMPARISON MODEL</span><h3>Three layers.<br/>No false precision.</h3><p>Historical evidence remains useful when each claim is matched to the strongest comparison the underlying data can support.</p></div><div className="comparisonLayers"><article><span>01</span><div className="evidenceBadge measured">Measured trend</div><h4>Audited 2026 monthly series</h4><p>Strictly comparable snapshots using a stable core source panel, query set and taxonomy. Appropriate for numeric change, momentum and confidence intervals.</p></article><article><span>02</span><div className="evidenceBadge directional">Directional signal</div><h4>Recalculated historical benchmarks</h4><p>Older raw data—especially 2023—is reprocessed with the current taxonomy. Comparable fields become benchmark points, not an invented smooth line.</p></article><article><span>03</span><div className="evidenceBadge context">Historical context</div><h4>AI-assisted evidence synthesis</h4><p>AI summarizes changes in titles, responsibilities and language across archived reports. Every synthesis links to evidence and is human-reviewed.</p></article></div></div>
         <div className="bridgeTimeline"><span>2014<br/><small>Published context</small></span><i/><span>2016<br/><small>Published context</small></span><i/><span>2023<br/><small>Recalculated benchmark</small></span><b>···</b><span className="current">2026<br/><small>Monthly measured series</small></span></div>
         <div className="evidenceLegend"><span className="label">HOW TO READ CLAIMS</span><div><i className="measured"/><b>Measured trend</b><p>Comparable data supports a quantitative claim.</p></div><div><i className="directional"/><b>Directional signal</b><p>Evidence suggests movement, but coverage changed.</p></div><div><i className="context"/><b>Historical context</b><p>Useful qualitative evidence; not a direct numerical comparison.</p></div></div>
@@ -150,7 +137,7 @@ export default function Home() {
       <section className="section" id="roadmap">
         <div className="sectionHead"><div><span className="kicker">07 / DELIVERY PLAN</span><h2>From pilot to a trusted<br/>monthly publication.</h2></div></div>
         <div className="roadmap"><article><span>WEEK 1–2</span><h3>Design the instrument</h3><p>Freeze scope, sources, role families, skills dictionary, sampling rules and QA targets.</p></article><article><span>WEEK 3–4</span><h3>Run the benchmark</h3><p>Collect the first 2026 sample, calibrate classifiers and manually audit a stratified 10% sample.</p></article><article><span>MONTH 2</span><h3>Publish the first edition</h3><p>Release findings, methodology, downloadable tables and a known-limitations note.</p></article><article><span>MONTHLY</span><h3>Refresh and compare</h3><p>Ingest, dedupe, classify, review exceptions, freeze snapshot and show change versus prior month.</p></article></div>
-        <div className="footerCta"><span className="mark large">D/26</span><div><h2>Build the evidence base once.<br/>Let the report keep moving.</h2><p>Next milestone: approved sources + a representative 2026 benchmark sample.</p></div><button className="primary" onClick={() => setMethodOpen(true)}>View research specification</button></div>
+        <div className="footerCta"><span className="mark large">D/26</span><div><h2>Build the evidence base once.<br/>Let the report keep moving.</h2><p>Next milestone: complete the 150-record audit and expand the employer source panel.</p></div><button className="primary" onClick={() => setMethodOpen(true)}>View research specification</button></div>
       </section>
 
       <footer><span>DevOps Skills Index · 2026 Pilot</span><span>Method inspired by the Initcron / School of DevOps reports, 2014–2023</span><a href="#top">Back to top ↑</a></footer>

@@ -1,0 +1,23 @@
+{
+  "version":"2026.1",
+  "role_families":{
+    "MLOps / AI Platform":["mlops","machine learning platform","ai platform","ai infrastructure","ml infrastructure","machine learning infrastructure","model serving"],
+    "Site Reliability Engineer":["site reliability","sre","reliability engineer","production engineer"],
+    "Platform Engineer":["platform engineer","platform engineering","developer platform","internal developer platform"],
+    "DevSecOps":["devsecops","cloud security engineer","platform security engineer"],
+    "DevOps Engineer":["devops","release engineer","build engineer","ci/cd engineer","deployment engineer"],
+    "Cloud / Infrastructure":["cloud engineer","infrastructure engineer","systems engineer","kubernetes engineer","cloud architect","infrastructure architect"]
+  },
+  "skills":{
+    "Kubernetes":["kubernetes","k8s"],"Docker":["docker","containerization"],"AWS":["aws","amazon web services"],"Azure":["azure"],"Google Cloud":["gcp","google cloud"],
+    "Terraform / OpenTofu":["terraform","opentofu"],"Ansible":["ansible"],"Linux":["linux","unix"],"Python":["python"],"Go":["golang"," go "],
+    "CI/CD":["ci/cd","continuous integration","continuous delivery","continuous deployment"],"GitHub Actions":["github actions"],"GitLab CI":["gitlab ci"],"Jenkins":["jenkins"],"Argo CD":["argo cd","argocd"],
+    "Prometheus":["prometheus"],"Grafana":["grafana"],"OpenTelemetry":["opentelemetry","open telemetry"],"Observability":["observability","monitoring and alerting"],
+    "SRE practices":["slo","service level objective","error budget","incident management","on-call","on call"],"DevSecOps":["devsecops","policy as code","supply chain security"],"FinOps":["finops","cloud cost optimization"],
+    "MLOps":["mlops","machine learning operations","model registry","feature store","experiment tracking","model drift"],"LLMOps":["llmops","llm operations","prompt management","model gateway"],
+    "Agentic systems":["agentic","ai agent","agent orchestration","multi-agent","multi agent","model context protocol"," mcp "],"LLM / GenAI":["large language model"," llm","generative ai","genai","foundation model"],
+    "RAG / Vector data":["retrieval augmented generation"," rag ","vector database","embeddings"],"AI evaluation & safety":["llm evaluation","model evaluation","guardrails","hallucination","red teaming"],
+    "AI infrastructure":["gpu","cuda","inference serving","vllm","kserve","ray serve"],"AI platform tools":["mlflow","kubeflow","langchain","llamaindex","pytorch","tensorflow"],
+    "Cloud AI services":["bedrock","sagemaker","vertex ai","azure ai","openai api"]
+  }
+}

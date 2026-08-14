@@ -1,0 +1,10 @@
+[
+  {"company":"Anthropic","provider":"greenhouse","token":"anthropic","region_bias":"Worldwide"},
+  {"company":"Datadog","provider":"greenhouse","token":"datadog","region_bias":"Worldwide"},
+  {"company":"Cloudflare","provider":"greenhouse","token":"cloudflare","region_bias":"Worldwide"},
+  {"company":"Grafana Labs","provider":"greenhouse","token":"grafanalabs","region_bias":"Worldwide"},
+  {"company":"MongoDB","provider":"greenhouse","token":"mongodb","region_bias":"Worldwide"},
+  {"company":"Cockroach Labs","provider":"greenhouse","token":"cockroachlabs","region_bias":"Worldwide"},
+  {"company":"GitLab","provider":"greenhouse","token":"gitlab","region_bias":"Worldwide"},
+  {"company":"Elastic","provider":"greenhouse","token":"elastic","region_bias":"Worldwide"}
+]

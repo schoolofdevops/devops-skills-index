@@ -1,0 +1,24 @@
+name: Refresh monthly job data
+on:
+  schedule:
+    - cron: "17 3 1 * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Collect and classify public job postings
+        run: python pipeline/collect.py
+      - name: Commit the frozen monthly snapshot
+        run: |
+          git config user.name "devops-skills-index-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/snapshots public/data/latest.json
+          git diff --cached --quiet || git commit -m "Refresh monthly job data"
+          git push

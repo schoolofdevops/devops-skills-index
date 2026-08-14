@@ -1,0 +1,140 @@
+{
+  "snapshot_month": "2026-08",
+  "generated_at": "2026-08-14T12:16:00.536763+00:00",
+  "status": "pilot_unaudited",
+  "taxonomy_version": "2026.1",
+  "total_active_source_postings": 2199,
+  "relevant_deduplicated_postings": 1426,
+  "companies_covered": 8,
+  "role_families": {
+    "Cloud / Infrastructure": 919,
+    "MLOps / AI Platform": 166,
+    "DevSecOps": 101,
+    "DevOps Engineer": 97,
+    "Site Reliability Engineer": 83,
+    "Platform Engineer": 60
+  },
+  "seniority": {
+    "Lead+": 689,
+    "Mid-level": 371,
+    "Senior": 319,
+    "Entry": 47
+  },
+  "regions": {
+    "North America": 573,
+    "Other / Global": 420,
+    "Europe": 266,
+    "Asia-Pacific": 88,
+    "India": 79
+  },
+  "skills": {
+    "Observability": 774,
+    "AWS": 402,
+    "Google Cloud": 400,
+    "Python": 389,
+    "Azure": 367,
+    "Kubernetes": 312,
+    "LLM / GenAI": 291,
+    "Agentic systems": 212,
+    "Go": 202,
+    "SRE practices": 197,
+    "Grafana": 178,
+    "CI/CD": 158,
+    "Linux": 132,
+    "DevSecOps": 129,
+    "Terraform / OpenTofu": 101,
+    "Docker": 88,
+    "Prometheus": 59,
+    "AI evaluation & safety": 48,
+    "OpenTelemetry": 42,
+    "RAG / Vector data": 40,
+    "AI infrastructure": 33,
+    "Jenkins": 30,
+    "Ansible": 28,
+    "AI platform tools": 25,
+    "FinOps": 17,
+    "GitHub Actions": 13,
+    "GitLab CI": 9,
+    "MLOps": 6,
+    "Cloud AI services": 6,
+    "Argo CD": 6,
+    "LLMOps": 2
+  },
+  "ai_signals": {
+    "LLM / GenAI": 291,
+    "Agentic systems": 212,
+    "AI evaluation & safety": 48,
+    "RAG / Vector data": 40,
+    "AI infrastructure": 33,
+    "AI platform tools": 25,
+    "MLOps": 6,
+    "Cloud AI services": 6,
+    "LLMOps": 2
+  },
+  "coverage": [
+    {
+      "company": "Anthropic",
+      "provider": "Greenhouse",
+      "active_postings": 426,
+      "relevant_postings": 266,
+      "status": "ok"
+    },
+    {
+      "company": "Datadog",
+      "provider": "Greenhouse",
+      "active_postings": 431,
+      "relevant_postings": 407,
+      "status": "ok"
+    },
+    {
+      "company": "Cloudflare",
+      "provider": "Greenhouse",
+      "active_postings": 300,
+      "relevant_postings": 196,
+      "status": "ok"
+    },
+    {
+      "company": "Grafana Labs",
+      "provider": "Greenhouse",
+      "active_postings": 150,
+      "relevant_postings": 150,
+      "status": "ok"
+    },
+    {
+      "company": "MongoDB",
+      "provider": "Greenhouse",
+      "active_postings": 410,
+      "relevant_postings": 214,
+      "status": "ok"
+    },
+    {
+      "company": "Cockroach Labs",
+      "provider": "Greenhouse",
+      "active_postings": 28,
+      "relevant_postings": 20,
+      "status": "ok"
+    },
+    {
+      "company": "GitLab",
+      "provider": "Greenhouse",
+      "active_postings": 201,
+      "relevant_postings": 116,
+      "status": "ok"
+    },
+    {
+      "company": "Elastic",
+      "provider": "Greenhouse",
+      "active_postings": 253,
+      "relevant_postings": 98,
+      "status": "ok"
+    }
+  ],
+  "disclosures": [
+    "Pilot is not yet human-audited.",
+    "Source panel is concentrated in technology companies using public Greenhouse boards.",
+    "Monthly samples may include different employers and openings.",
+    "Job descriptions indicate stated demand, not hiring outcomes or actual work performed."
+  ],
+  "audit_sample_size": 150,
+  "audit_method": "Deterministic stratified 10% sample by role family, with at least 10 records per family."
+}

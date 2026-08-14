@@ -9,9 +9,22 @@ The project is designed as a repeatable monthly research publication. It separat
 - job titles from the skills requested inside those jobs;
 - required qualifications from preferred qualifications and responsibilities;
 - traditional DevOps, SRE and platform engineering from MLOps, LLMOps, AI infrastructure and agentic operations;
-- verified findings from illustrative pilot data.
+- verified findings from actual but unaudited pilot data.
 
-The historical methodology is based on School of DevOps reports published between 2014 and 2023. The next milestone is a representative, audited 2026 benchmark sample.
+The historical methodology is based on School of DevOps reports published between 2014 and 2023. The first 2026 pilot contains 1,426 normalized postings from eight public employer job boards. It is deliberately labeled unaudited because the initial source panel is not yet representative.
+
+## Data workflow
+
+`pipeline/collect.py` reads the approved source register in `data/sources.json`, collects public postings, normalizes and deduplicates records, applies the versioned taxonomy, and writes a frozen monthly snapshot. Full job descriptions are not republished; records retain source links, hashes, classification evidence and extracted signals.
+
+The monthly GitHub Action runs on the first day of each month. Each snapshot includes:
+
+- normalized job-level metadata;
+- aggregate role, seniority, geography, skill and AI-signal counts;
+- source coverage and disclosures;
+- a deterministic stratified 10% human-audit queue.
+
+Review workbook: [DevOps Skills Index 2026 — Monthly Data Review](https://docs.google.com/spreadsheets/d/1T37fdasLRmQCO79MsSYJaZoX7keslZdD5ZLclRmqRAA/edit)
 
 ## Website
 
@@ -38,4 +51,4 @@ npm run build:pages  # Static GitHub Pages export to out/
 
 ## Research status
 
-The current website is a product and methodology pilot. Any illustrative 2026 charts are labeled as such and must be replaced by audited market findings before the first public report is announced as research.
+The current website displays the actual August 2026 pilot and labels it unaudited. Complete the audit queue and broaden the source panel before announcing the snapshot as a representative market report.
