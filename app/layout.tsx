@@ -6,6 +6,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://skills.schoolofdevops.com"),
   title: "DevOps Skills Index 2026",
   description: "A living, evidence-led view of the roles and skills employers ask for across DevOps, platform engineering, SRE and AI operations.",
   openGraph: {
