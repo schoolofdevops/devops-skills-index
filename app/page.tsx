@@ -45,6 +45,20 @@ const aiSkillFamilies = [
   ["Cloud AI services", "Bedrock, SageMaker, Vertex AI, Azure AI, OpenAI APIs"],
 ] as const;
 
+const trendSeries = [
+  { title: "Role-family share", description: "DevOps, Platform, SRE, Cloud, MLOps, LLMOps and AI Platform as a share of the monthly relevant-job sample.", color: "#6689ff" },
+  { title: "Skills momentum", description: "Month-over-month change in skill penetration, with minimum sample and confidence thresholds before a trend is called.", color: "#86ad52" },
+  { title: "AI adoption", description: "AI terms in titles versus requirements, responsibilities and preferred qualifications—kept as separate series.", color: "#d274ac" },
+  { title: "Career opportunity", description: "Entry, mid, senior and lead demand over time, including the skill bundle associated with each level.", color: "#d9a44a" },
+];
+
+const historicalReports = [
+  { year: "2014", title: "DevOps Skills Survey", note: "India edition · early role and tool demand", href: "https://www.slideshare.net/slideshow/devops-skills-survey/48177949" },
+  { year: "2016", title: "DevOps Skills: You Got What It Takes?", note: "Expanded skills and career perspective", href: "https://www.slideshare.net/slideshow/devops-skills-you-got-what-it-takes/64424539" },
+  { year: "2016", title: "DevOps Skills Report", note: "Global job-posting analysis", href: "https://www.slideshare.net/slideshow/devops-skills-report-2016-v103/71034154" },
+  { year: "2023", title: "DevOps Skills Report Workbook", note: "India + worldwide dataset and pivots", href: "https://docs.google.com/spreadsheets/d/1zDQ6yRsPDJTzjErZEXW1UTqIxgdxfB9sBVlEFEha_2Q/edit?gid=899840872#gid=899840872" },
+];
+
 const framework = [
   ["01", "Collect", "Capture title, description, company, location, date, salary and source from approved feeds and public career pages."],
   ["02", "Clean", "Canonicalize locations and companies, strip boilerplate, detect reposts, and keep one record per real opening."],
@@ -65,7 +79,7 @@ export default function Home() {
     <main>
       <nav className="nav">
         <a className="brand" href="#top"><span className="mark">D/26</span><span>DevOps Skills Index</span></a>
-        <div className="navlinks"><a href="#signals">Signals</a><a href="#ai-impact">AI impact</a><a href="#method">Method</a><a href="#roadmap">Roadmap</a></div>
+        <div className="navlinks"><a href="#signals">Signals</a><a href="#ai-impact">AI impact</a><a href="#trends">Trends</a><a href="#method">Method</a><a href="#roadmap">Roadmap</a></div>
         <button className="outline" onClick={() => setMethodOpen(true)}>Read methodology</button>
       </nav>
 
@@ -103,25 +117,33 @@ export default function Home() {
         <div className="monthlyQuestions"><span className="label">QUESTIONS ANSWERED EVERY MONTH</span><div><p>Are MLOps and LLMOps growing as standalone titles?</p><p>Which DevOps roles now require AI or LLM knowledge?</p><p>Is agentic DevOps language moving from experiments to hiring requirements?</p><p>Which traditional skills remain prerequisites for AI operations?</p><p>How do AI requirements differ by seniority, geography and industry?</p><p>Which tools are durable signals versus short-lived product mentions?</p></div></div>
       </section>
 
+      <section className="section trendSection" id="trends">
+        <div className="sectionHead inverse"><div><span className="kicker">03 / TRENDS OVER TIME</span><h2>One snapshot informs.<br/>A series reveals change.</h2></div><p>Every audited monthly snapshot will remain frozen and comparable. The site will show direction, velocity and persistence—not just a fresh ranking that erases last month.</p></div>
+        <div className="trendHero"><div className="trendChart"><div className="trendChartTop"><span className="label">MONTHLY SERIES · 2026</span><span className="awaiting">● Awaiting first audited snapshot</span></div><div className="emptyPlot"><div className="gridLines"><i/><i/><i/><i/></div><div className="startMarker"><b>01</b><span>First verified<br/>data point</span></div><div className="futureLine"/><div className="futureDot d1"/><div className="futureDot d2"/><div className="futureDot d3"/></div><div className="monthAxis"><span>JAN</span><span>MAR</span><span>MAY</span><span>JUL</span><span>SEP</span><span>NOV</span></div></div><div className="trendRules"><span className="label">WHEN WE CALL IT A TREND</span><h3>Movement must be measurable, repeatable and sustained.</h3><ul><li><b>Comparable:</b> same core sources, query set and taxonomy version.</li><li><b>Material:</b> above a published minimum change threshold.</li><li><b>Persistent:</b> visible across multiple snapshots, not a one-month spike.</li><li><b>Qualified:</b> shown with sample size, coverage and confidence notes.</li></ul></div></div>
+        <div className="seriesGrid">{trendSeries.map((series, i) => <article key={series.title}><div className="seriesHeader"><span>0{i+1}</span><i style={{background: series.color}}/></div><h3>{series.title}</h3><p>{series.description}</p><div className="miniPlot"><span/><span/><span/><span/><span/><span/></div></article>)}</div>
+        <div className="trendViews"><span className="label">EVERY GRAPH CAN BE VIEWED AS</span><div><b>Share</b><span>How common is it?</span></div><div><b>Change</b><span>What moved this month?</span></div><div><b>Momentum</b><span>Is movement accelerating?</span></div><div><b>Persistence</b><span>Is the signal durable?</span></div><div><b>Co-occurrence</b><span>What travels with it?</span></div></div>
+        <div className="historyArchive"><div><span className="kicker">HISTORICAL REFERENCE</span><h3>The reports that came before.</h3><p>These editions provide useful context, but they will not be drawn as one continuous time series unless their samples and taxonomies can be reconciled. They remain available as source material and historical snapshots.</p></div><div className="historyList">{historicalReports.map((report, i) => <a href={report.href} target="_blank" rel="noreferrer" key={`${report.year}-${report.title}`}><span>{report.year}</span><div><b>{report.title}</b><small>{report.note}</small></div><i>↗</i></a>)}</div></div>
+      </section>
+
       <section className="section" id="roles">
-        <div className="sectionHead"><div><span className="kicker">03 / CAREER LENS</span><h2>One market.<br/>Four different ladders.</h2></div><p>Percentages alone hide what candidates need. Every monthly edition should split demand by seniority and distinguish required skills from preferred ones.</p></div>
+        <div className="sectionHead"><div><span className="kicker">04 / CAREER LENS</span><h2>One market.<br/>Four different ladders.</h2></div><p>Percentages alone hide what candidates need. Every monthly edition should split demand by seniority and distinguish required skills from preferred ones.</p></div>
         <div className="seniority">{seniority.map((s,i)=><article key={s.level}><div className="donut" style={{"--p": `${s.value*3.6}deg`} as React.CSSProperties}><span>{s.value}%</span></div><span className="step">0{i+1}</span><h3>{s.level}</h3><p>{s.note}</p></article>)}</div>
       </section>
 
       <section className="section paper" id="method">
-        <div className="sectionHead"><div><span className="kicker">04 / THE METHOD</span><h2>A repeatable pipeline,<br/>with receipts.</h2></div><p>Your original principle remains the anchor: companies reveal demand in their job descriptions. The 2026 edition adds reproducibility, deduplication, contextual classification and an explicit QA layer.</p></div>
+        <div className="sectionHead"><div><span className="kicker">05 / THE METHOD</span><h2>A repeatable pipeline,<br/>with receipts.</h2></div><p>Your original principle remains the anchor: companies reveal demand in their job descriptions. The 2026 edition adds reproducibility, deduplication, contextual classification and an explicit QA layer.</p></div>
         <div className="framework">{framework.map(item=><article key={item[0]}><span>{item[0]}</span><h3>{item[1]}</h3><p>{item[2]}</p></article>)}</div>
         <div className="methodCallout"><div><span className="label">THE IMPORTANT CHANGE</span><h3>Count postings, not keyword hits.</h3></div><p>A skill counts once per posting. We retain frequency, but also record whether it appears in the title, required qualifications, preferred qualifications or responsibilities. This prevents long descriptions and repeated boilerplate from dominating the report.</p></div>
       </section>
 
       <section className="section taxonomy">
-        <div className="sectionHead inverse"><div><span className="kicker">05 / 2026 TAXONOMY</span><h2>Track the old stack.<br/>Make room for the new one.</h2></div><p>Version the dictionary monthly. Never rewrite history: each snapshot keeps the taxonomy version used to produce it.</p></div>
+        <div className="sectionHead inverse"><div><span className="kicker">06 / 2026 TAXONOMY</span><h2>Track the old stack.<br/>Make room for the new one.</h2></div><p>Version the dictionary monthly. Never rewrite history: each snapshot keeps the taxonomy version used to produce it.</p></div>
         <div className="chips"><span>Systems & Linux</span><span>Cloud</span><span>Infrastructure as code</span><span>Containers</span><span>CI/CD</span><span>Observability</span><span>SRE practices</span><span>Platform engineering</span><span>DevSecOps</span><span>FinOps</span><span>Data operations</span><span>MLOps</span><span>LLMOps</span><span>AI infrastructure</span><span>Agentic operations</span><span>Developer experience</span></div>
         <div className="distinctions"><article><b>ROLE</b><h3>What are they hiring?</h3><p>Canonical family plus the employer’s exact title.</p></article><article><b>CAPABILITY</b><h3>What must the person do?</h3><p>Responsibilities and operating practices, independent of tools.</p></article><article><b>SKILL</b><h3>What must they know?</h3><p>Tools, platforms, languages, frameworks and concepts.</p></article></div>
       </section>
 
       <section className="section" id="roadmap">
-        <div className="sectionHead"><div><span className="kicker">06 / DELIVERY PLAN</span><h2>From pilot to a trusted<br/>monthly publication.</h2></div></div>
+        <div className="sectionHead"><div><span className="kicker">07 / DELIVERY PLAN</span><h2>From pilot to a trusted<br/>monthly publication.</h2></div></div>
         <div className="roadmap"><article><span>WEEK 1–2</span><h3>Design the instrument</h3><p>Freeze scope, sources, role families, skills dictionary, sampling rules and QA targets.</p></article><article><span>WEEK 3–4</span><h3>Run the benchmark</h3><p>Collect the first 2026 sample, calibrate classifiers and manually audit a stratified 10% sample.</p></article><article><span>MONTH 2</span><h3>Publish the first edition</h3><p>Release findings, methodology, downloadable tables and a known-limitations note.</p></article><article><span>MONTHLY</span><h3>Refresh and compare</h3><p>Ingest, dedupe, classify, review exceptions, freeze snapshot and show change versus prior month.</p></article></div>
         <div className="footerCta"><span className="mark large">D/26</span><div><h2>Build the evidence base once.<br/>Let the report keep moving.</h2><p>Next milestone: approved sources + a representative 2026 benchmark sample.</p></div><button className="primary" onClick={() => setMethodOpen(true)}>View research specification</button></div>
       </section>
