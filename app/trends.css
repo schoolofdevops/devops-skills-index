@@ -37,4 +37,12 @@
 .historyList { border-top: 1px solid #45483f; }
 .historyList a { color: inherit; text-decoration: none; display: grid; grid-template-columns: 62px 1fr 20px; gap: 18px; padding: 20px 0; border-bottom: 1px solid #45483f; align-items: center; }
 .historyList a > span { color: var(--acid); font: 11px var(--font-geist-mono); }.historyList b,.historyList small { display: block; }.historyList small { color: #858980; margin-top: 5px; }.historyList i { font-style: normal; color: #858980; }
-@media(max-width:900px){.trendHero,.historyArchive{grid-template-columns:1fr}.seriesGrid{grid-template-columns:1fr 1fr}.trendViews{grid-template-columns:1fr 1fr 1fr}.trendViews>span{grid-column:1/-1}.trendChart{border-right:0;border-bottom:1px solid #45483f}}@media(max-width:560px){.seriesGrid{grid-template-columns:1fr}.trendViews{grid-template-columns:1fr 1fr}.emptyPlot{height:260px}.startMarker{width:52px}.historyArchive{gap:25px}}
+.trendDisclosure { margin-top: 80px; border: 1px solid #5a5e53; display: grid; grid-template-columns: .65fr 1.35fr; }
+.trendDisclosure > div:first-child { padding: 38px; background: var(--acid); color: #111; }
+.trendDisclosure h3 { font-size: 31px; line-height: 1.08; letter-spacing: -.04em; margin-top: 50px; }
+.disclosureGrid { display: grid; grid-template-columns: 1fr 1fr; }
+.disclosureGrid article { padding: 30px; border-left: 1px solid #45483f; border-bottom: 1px solid #45483f; }
+.disclosureGrid b { font-size: 14px; }.disclosureGrid p { color: #a4a79d; font-size: 12px; line-height: 1.6; margin-bottom: 0; }
+.assumptionNote { display: grid; grid-template-columns: 200px 1fr; gap: 35px; border-top: 1px solid var(--ink); margin-top: 35px; padding-top: 25px; }
+.assumptionNote span { font: 10px var(--font-geist-mono); letter-spacing: .12em; }.assumptionNote p { margin: 0; line-height: 1.65; color: #5f625a; }
+@media(max-width:900px){.trendHero,.historyArchive,.trendDisclosure{grid-template-columns:1fr}.seriesGrid{grid-template-columns:1fr 1fr}.trendViews{grid-template-columns:1fr 1fr 1fr}.trendViews>span{grid-column:1/-1}.trendChart{border-right:0;border-bottom:1px solid #45483f}}@media(max-width:560px){.seriesGrid,.disclosureGrid{grid-template-columns:1fr}.trendViews{grid-template-columns:1fr 1fr}.emptyPlot{height:260px}.startMarker{width:52px}.historyArchive{gap:25px}.assumptionNote{grid-template-columns:1fr;gap:12px}}
