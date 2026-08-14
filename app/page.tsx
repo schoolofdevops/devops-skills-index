@@ -27,6 +27,24 @@ const seniority = [
   { level: "Lead+", value: 9, note: "strategy, developer experience, governance" },
 ];
 
+const aiRoleShifts = [
+  { role: "DevOps Engineer", from: "Automate delivery and infrastructure", to: "Build governed AI-assisted delivery, secure model access and automate agent workflows", signals: ["AI coding assistants", "agent orchestration", "policy & guardrails"] },
+  { role: "Platform Engineer", from: "Provide paved roads for application teams", to: "Provide self-service AI platforms for models, prompts, retrieval, evaluation and inference", signals: ["GPU platforms", "model gateways", "vector databases"] },
+  { role: "Site Reliability Engineer", from: "Protect availability and latency of services", to: "Define reliability for probabilistic systems: quality, drift, cost, safety and model performance", signals: ["LLM observability", "evaluation", "AI incident response"] },
+  { role: "MLOps / LLMOps Engineer", from: "A specialist role adjacent to DevOps", to: "An operational discipline increasingly embedded across platform and reliability teams", signals: ["model lifecycle", "LLM serving", "experiment tracking"] },
+];
+
+const aiSkillFamilies = [
+  ["AI foundations", "AI, machine learning, generative AI, transformers, embeddings"],
+  ["Model operations", "MLOps, model registry, feature store, experiment tracking, drift"],
+  ["LLM operations", "LLMOps, prompt management, RAG, vector databases, model gateways"],
+  ["Agentic systems", "AI agents, agent orchestration, tool use, MCP, multi-agent workflows"],
+  ["AI infrastructure", "GPU scheduling, accelerators, inference serving, Kubernetes operators"],
+  ["Quality & safety", "evaluation, tracing, hallucination monitoring, guardrails, red teaming"],
+  ["AI platform tools", "MLflow, Kubeflow, Ray, KServe, vLLM, LangChain, LlamaIndex"],
+  ["Cloud AI services", "Bedrock, SageMaker, Vertex AI, Azure AI, OpenAI APIs"],
+] as const;
+
 const framework = [
   ["01", "Collect", "Capture title, description, company, location, date, salary and source from approved feeds and public career pages."],
   ["02", "Clean", "Canonicalize locations and companies, strip boilerplate, detect reposts, and keep one record per real opening."],
@@ -47,7 +65,7 @@ export default function Home() {
     <main>
       <nav className="nav">
         <a className="brand" href="#top"><span className="mark">D/26</span><span>DevOps Skills Index</span></a>
-        <div className="navlinks"><a href="#signals">Signals</a><a href="#method">Method</a><a href="#roadmap">Roadmap</a></div>
+        <div className="navlinks"><a href="#signals">Signals</a><a href="#ai-impact">AI impact</a><a href="#method">Method</a><a href="#roadmap">Roadmap</a></div>
         <button className="outline" onClick={() => setMethodOpen(true)}>Read methodology</button>
       </nav>
 
@@ -77,25 +95,33 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section aiImpact" id="ai-impact">
+        <div className="sectionHead"><div><span className="kicker">02 / AI IMPACT</span><h2>AI is changing the work<br/>before it changes the title.</h2></div><p>This chapter will measure whether AI creates new operational roles, enters existing roles as a required capability, or changes the responsibilities of the same familiar job titles.</p></div>
+        <div className="aiThesis"><article><span className="label">THE QUESTION</span><h3>Is “Agentic DevOps” becoming a role—or a capability inside DevOps?</h3><p>We will report title adoption separately from mentions in job descriptions. A phrase appearing in responsibilities is not evidence that a new occupation exists.</p></article><div className="aiMeasures"><div><b>01</b><span>Dedicated AI-operations roles</span></div><div><b>02</b><span>AI skills inside existing roles</span></div><div><b>03</b><span>Responsibilities being augmented</span></div><div><b>04</b><span>Traditional tasks being displaced</span></div></div></div>
+        <div className="aiShiftGrid">{aiRoleShifts.map((item, i) => <article key={item.role}><div className="shiftTop"><span>0{i+1}</span><h3>{item.role}</h3></div><div className="shift"><small>FROM</small><p>{item.from}</p><i>↓</i><small>TOWARD</small><p>{item.to}</p></div><div className="signalTags">{item.signals.map(signal => <span key={signal}>{signal}</span>)}</div></article>)}</div>
+        <div className="aiSkillsBlock"><div><span className="kicker">WHAT WE WILL EXTRACT</span><h3>An AI-specific skills dictionary,<br/>measured in context.</h3><p>Each term is classified as required, preferred, responsibility or incidental mention. We will also report co-occurrence—for example, how often Kubernetes appears with vLLM, or SRE appears with model evaluation.</p></div><div className="aiSkillList">{aiSkillFamilies.map((family, i) => <div key={family[0]}><span>{String(i+1).padStart(2,"0")}</span><b>{family[0]}</b><p>{family[1]}</p></div>)}</div></div>
+        <div className="monthlyQuestions"><span className="label">QUESTIONS ANSWERED EVERY MONTH</span><div><p>Are MLOps and LLMOps growing as standalone titles?</p><p>Which DevOps roles now require AI or LLM knowledge?</p><p>Is agentic DevOps language moving from experiments to hiring requirements?</p><p>Which traditional skills remain prerequisites for AI operations?</p><p>How do AI requirements differ by seniority, geography and industry?</p><p>Which tools are durable signals versus short-lived product mentions?</p></div></div>
+      </section>
+
       <section className="section" id="roles">
-        <div className="sectionHead"><div><span className="kicker">02 / CAREER LENS</span><h2>One market.<br/>Four different ladders.</h2></div><p>Percentages alone hide what candidates need. Every monthly edition should split demand by seniority and distinguish required skills from preferred ones.</p></div>
+        <div className="sectionHead"><div><span className="kicker">03 / CAREER LENS</span><h2>One market.<br/>Four different ladders.</h2></div><p>Percentages alone hide what candidates need. Every monthly edition should split demand by seniority and distinguish required skills from preferred ones.</p></div>
         <div className="seniority">{seniority.map((s,i)=><article key={s.level}><div className="donut" style={{"--p": `${s.value*3.6}deg`} as React.CSSProperties}><span>{s.value}%</span></div><span className="step">0{i+1}</span><h3>{s.level}</h3><p>{s.note}</p></article>)}</div>
       </section>
 
       <section className="section paper" id="method">
-        <div className="sectionHead"><div><span className="kicker">03 / THE METHOD</span><h2>A repeatable pipeline,<br/>with receipts.</h2></div><p>Your original principle remains the anchor: companies reveal demand in their job descriptions. The 2026 edition adds reproducibility, deduplication, contextual classification and an explicit QA layer.</p></div>
+        <div className="sectionHead"><div><span className="kicker">04 / THE METHOD</span><h2>A repeatable pipeline,<br/>with receipts.</h2></div><p>Your original principle remains the anchor: companies reveal demand in their job descriptions. The 2026 edition adds reproducibility, deduplication, contextual classification and an explicit QA layer.</p></div>
         <div className="framework">{framework.map(item=><article key={item[0]}><span>{item[0]}</span><h3>{item[1]}</h3><p>{item[2]}</p></article>)}</div>
         <div className="methodCallout"><div><span className="label">THE IMPORTANT CHANGE</span><h3>Count postings, not keyword hits.</h3></div><p>A skill counts once per posting. We retain frequency, but also record whether it appears in the title, required qualifications, preferred qualifications or responsibilities. This prevents long descriptions and repeated boilerplate from dominating the report.</p></div>
       </section>
 
       <section className="section taxonomy">
-        <div className="sectionHead inverse"><div><span className="kicker">04 / 2026 TAXONOMY</span><h2>Track the old stack.<br/>Make room for the new one.</h2></div><p>Version the dictionary monthly. Never rewrite history: each snapshot keeps the taxonomy version used to produce it.</p></div>
+        <div className="sectionHead inverse"><div><span className="kicker">05 / 2026 TAXONOMY</span><h2>Track the old stack.<br/>Make room for the new one.</h2></div><p>Version the dictionary monthly. Never rewrite history: each snapshot keeps the taxonomy version used to produce it.</p></div>
         <div className="chips"><span>Systems & Linux</span><span>Cloud</span><span>Infrastructure as code</span><span>Containers</span><span>CI/CD</span><span>Observability</span><span>SRE practices</span><span>Platform engineering</span><span>DevSecOps</span><span>FinOps</span><span>Data operations</span><span>MLOps</span><span>LLMOps</span><span>AI infrastructure</span><span>Agentic operations</span><span>Developer experience</span></div>
         <div className="distinctions"><article><b>ROLE</b><h3>What are they hiring?</h3><p>Canonical family plus the employer’s exact title.</p></article><article><b>CAPABILITY</b><h3>What must the person do?</h3><p>Responsibilities and operating practices, independent of tools.</p></article><article><b>SKILL</b><h3>What must they know?</h3><p>Tools, platforms, languages, frameworks and concepts.</p></article></div>
       </section>
 
       <section className="section" id="roadmap">
-        <div className="sectionHead"><div><span className="kicker">05 / DELIVERY PLAN</span><h2>From pilot to a trusted<br/>monthly publication.</h2></div></div>
+        <div className="sectionHead"><div><span className="kicker">06 / DELIVERY PLAN</span><h2>From pilot to a trusted<br/>monthly publication.</h2></div></div>
         <div className="roadmap"><article><span>WEEK 1–2</span><h3>Design the instrument</h3><p>Freeze scope, sources, role families, skills dictionary, sampling rules and QA targets.</p></article><article><span>WEEK 3–4</span><h3>Run the benchmark</h3><p>Collect the first 2026 sample, calibrate classifiers and manually audit a stratified 10% sample.</p></article><article><span>MONTH 2</span><h3>Publish the first edition</h3><p>Release findings, methodology, downloadable tables and a known-limitations note.</p></article><article><span>MONTHLY</span><h3>Refresh and compare</h3><p>Ingest, dedupe, classify, review exceptions, freeze snapshot and show change versus prior month.</p></article></div>
         <div className="footerCta"><span className="mark large">D/26</span><div><h2>Build the evidence base once.<br/>Let the report keep moving.</h2><p>Next milestone: approved sources + a representative 2026 benchmark sample.</p></div><button className="primary" onClick={() => setMethodOpen(true)}>View research specification</button></div>
       </section>

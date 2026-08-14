@@ -1,0 +1,46 @@
+.aiImpact { background: #e7ebe1; }
+.aiThesis { display: grid; grid-template-columns: 1.15fr .85fr; background: var(--ink); color: #f8f6ef; margin-bottom: 20px; }
+.aiThesis > article { padding: 42px; border-right: 1px solid #45483f; }
+.aiThesis h3 { font-size: 38px; line-height: 1.08; letter-spacing: -.04em; max-width: 650px; }
+.aiThesis p { color: #afb2a7; line-height: 1.6; }
+.aiMeasures { display: grid; grid-template-columns: 1fr 1fr; }
+.aiMeasures div { padding: 30px; border-right: 1px solid #45483f; border-bottom: 1px solid #45483f; display: flex; flex-direction: column; justify-content: space-between; min-height: 150px; }
+.aiMeasures b { font: 12px var(--font-geist-mono); color: var(--acid); }
+.aiMeasures span { font-size: 14px; line-height: 1.4; }
+.aiShiftGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.aiShiftGrid > article { background: #faf9f5; padding: 32px; }
+.shiftTop { display: flex; gap: 18px; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+.shiftTop span { font: 11px var(--font-geist-mono); color: #888; }
+.shiftTop h3 { font-size: 24px; margin: 0; }
+.shift { padding: 25px 0; }
+.shift small { font: 10px var(--font-geist-mono); color: #888; }
+.shift p { font-size: 16px; line-height: 1.5; margin: 8px 0; }
+.shift i { display: block; color: #70823b; font-style: normal; margin: 8px 0; }
+.signalTags { display: flex; flex-wrap: wrap; gap: 7px; }
+.signalTags span { font-size: 11px; border: 1px solid #bfc2b8; padding: 7px 9px; }
+.aiSkillsBlock { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; margin-top: 85px; }
+.aiSkillsBlock h3 { font-size: 38px; line-height: 1.05; letter-spacing: -.04em; }
+.aiSkillsBlock > div:first-child p { line-height: 1.6; color: #65685f; }
+.aiSkillList { border-top: 1px solid #9fa298; }
+.aiSkillList > div { display: grid; grid-template-columns: 35px 180px 1fr; gap: 15px; padding: 15px 0; border-bottom: 1px solid #bfc2b8; align-items: start; }
+.aiSkillList span { font: 10px var(--font-geist-mono); color: #888; }
+.aiSkillList b { font-size: 13px; }
+.aiSkillList p { font-size: 12px; color: #686b63; margin: 0; line-height: 1.5; }
+.monthlyQuestions { margin-top: 70px; border-top: 2px solid var(--ink); padding-top: 25px; }
+.monthlyQuestions > div { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 20px; }
+.monthlyQuestions p { padding: 24px 24px 24px 0; margin: 0; border-top: 1px solid #bfc2b8; font-size: 15px; line-height: 1.45; }
+
+@media (max-width: 900px) {
+  .aiThesis, .aiSkillsBlock { grid-template-columns: 1fr; }
+  .aiShiftGrid { grid-template-columns: 1fr; }
+  .monthlyQuestions > div { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .aiMeasures { grid-template-columns: 1fr; }
+  .aiThesis > article { padding: 28px; }
+  .aiThesis h3, .aiSkillsBlock h3 { font-size: 31px; }
+  .aiSkillList > div { grid-template-columns: 26px 1fr; }
+  .aiSkillList p { grid-column: 2; }
+  .monthlyQuestions > div { grid-template-columns: 1fr; }
+}
