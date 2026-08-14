@@ -1,0 +1,16 @@
+{
+  "india": {
+    "minimum_relevant_postings": 500,
+    "minimum_companies": 150,
+    "stretch_relevant_postings": 900,
+    "stretch_companies": 300
+  },
+  "overall": {
+    "minimum_company_types": 8
+  },
+  "notes": [
+    "The 2023 India workbook contained 930 postings from 376 companies.",
+    "Coverage gates prevent a convenient but concentrated source panel from being published as a representative market report.",
+    "Passing coverage gates does not replace the relevance audit."
+  ]
+}

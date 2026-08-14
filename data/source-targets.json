@@ -1,0 +1,7 @@
+[
+  {"segment":"India IT services","companies":["TCS","Infosys","Wipro","HCLTech","Tech Mahindra","LTIMindtree","Cognizant","Capgemini","Accenture","Deloitte","EY","KPMG","PwC","Publicis Sapient"],"status":"adapter discovery required"},
+  {"segment":"India banking and finance GCC","companies":["JPMorgan Chase","Wells Fargo","Citi","DBS Bank","Barclays","Goldman Sachs","Mastercard","Visa"],"status":"adapter discovery required"},
+  {"segment":"India retail and industrial GCC","companies":["Walmart Global Tech","Lowe's India","Target","Tesco","Shell","Siemens","Bosch Group","Western Digital"],"status":"partially connected"},
+  {"segment":"India telecom","companies":["Jio","Airtel","Vodafone Idea","Nokia","Ericsson"],"status":"adapter discovery required"},
+  {"segment":"India product and SaaS","companies":["PhonePe","Meesho","Groww","Postman","HackerRank","Mindtickle","Slice","Tekion","Freshworks","BrowserStack","Razorpay","Swiggy","Flipkart","ShareChat"],"status":"partially connected"}
+]

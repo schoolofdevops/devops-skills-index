@@ -1,4 +1,12 @@
 [
+  {"company":"Bosch Group","provider":"smartrecruiters","token":"BoschGroup","company_type":"Industrial manufacturing / GCC","target_market":"India + Worldwide"},
+  {"company":"NielsenIQ","provider":"smartrecruiters","token":"NielsenIQ","company_type":"Data analytics / GCC","target_market":"India + Worldwide"},
+  {"company":"Western Digital","provider":"smartrecruiters","token":"WesternDigital","company_type":"Hardware / GCC","target_market":"India + Worldwide"},
+  {"company":"ServiceNow","provider":"smartrecruiters","token":"ServiceNow","company_type":"Enterprise SaaS / GCC","target_market":"India + Worldwide"},
+  {"company":"Version 1","provider":"smartrecruiters","token":"Version1","company_type":"IT services / consulting","target_market":"India + Worldwide"},
+  {"company":"Experian","provider":"smartrecruiters","token":"Experian","company_type":"Financial data / GCC","target_market":"India + Worldwide"},
+  {"company":"Accor","provider":"smartrecruiters","token":"Accor","company_type":"Hospitality","target_market":"India + Worldwide"},
+  {"company":"Tekion","provider":"ashby","token":"tekion","company_type":"India automotive SaaS / GCC","target_market":"India + Worldwide"},
   {"company":"Thoughtworks","provider":"greenhouse","token":"thoughtworks","company_type":"IT services / consulting","target_market":"India + Worldwide"},
   {"company":"CI&T","provider":"lever","token":"ciandt","company_type":"IT services / consulting","target_market":"India + Worldwide"},
   {"company":"HighRadius","provider":"greenhouse","token":"highradius","company_type":"Enterprise software / services","target_market":"India + Worldwide"},

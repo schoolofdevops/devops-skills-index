@@ -24,6 +24,10 @@ The monthly GitHub Action runs on the first day of each month. Each snapshot inc
 - source coverage and disclosures;
 - a deterministic stratified 10% human-audit queue.
 
+Candidate snapshots must pass the versioned gates in `data/coverage-gates.json` before replacing `public/data/latest.json`. The current India publication gate is 500 relevant postings from at least 150 companies; passing the gate still requires a relevance audit.
+
+Supported public ATS adapters: Greenhouse, Lever, SmartRecruiters and Ashby. `data/source-targets.json` tracks priority employers whose career systems still need compliant adapters.
+
 Review workbook: [DevOps Skills Index 2026 — Corrected Semantic Pilot Review](https://docs.google.com/spreadsheets/d/1UmPSeFHqa5jeASbtyBwLz9RrP6G-mvXcUl8zex0Luno/edit)
 
 ## Website
