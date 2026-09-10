@@ -17,12 +17,24 @@ jobs:
           cache: "pip"
       - name: Install semantic retrieval dependency
         run: pip install -r requirements.txt
+      - name: Discover India roles through licensed job feed
+        env:
+          JOOBLE_API_KEY: ${{ secrets.JOOBLE_API_KEY }}
+        run: |
+          if [ -z "$JOOBLE_API_KEY" ]; then
+            echo "JOOBLE_API_KEY is not configured; skipping discovery-only feed."
+          else
+            python pipeline/discover_jooble.py
+          fi
+      - name: Measure historical India employer coverage
+        run: python pipeline/company_panel.py
       - name: Collect and classify public job postings
         run: python pipeline/collect.py
       - name: Commit the frozen monthly snapshot
         run: |
           git config user.name "devops-skills-index-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/snapshots public/data/latest.json
+          git add data/snapshots data/company-panel-coverage.json public/data/latest.json
+          if [ -d data/discovery ]; then git add data/discovery; fi
           git diff --cached --quiet || git commit -m "Refresh monthly job data"
           git push

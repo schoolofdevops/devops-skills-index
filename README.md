@@ -24,9 +24,21 @@ The monthly GitHub Action runs on the first day of each month. Each snapshot inc
 - source coverage and disclosures;
 - a deterministic stratified 10% human-audit queue.
 
+An optional Jooble discovery stage broadens the India employer panel without treating aggregator snippets as evidence. It requires a repository secret named `JOOBLE_API_KEY`. Discovery records remain unpublished and must resolve to a permitted canonical employer posting before description analysis or skill extraction.
+
 Candidate snapshots must pass the versioned gates in `data/coverage-gates.json` before replacing `public/data/latest.json`. The current India publication gate is 500 relevant postings from at least 150 companies; passing the gate still requires a relevance audit.
 
-Supported public ATS adapters: Greenhouse, Lever, SmartRecruiters, Ashby and Workday. Workday collection uses targeted operational-role searches before semantic screening so large enterprise boards remain practical to sample. `data/source-targets.json` tracks priority employers whose career systems still need compliant adapters.
+Supported public ATS adapters: Greenhouse, Lever, SmartRecruiters, Ashby and Workday. Workday collection uses targeted operational-role searches before semantic screening so large enterprise boards remain practical to sample. `data/source-targets.json` tracks priority employers whose career systems still need compliant adapters. `data/historical-india-company-panel.json` preserves all 376 company labels from the 2023 India workbook as the starting discovery panel, and `data/source-permissions.json` records what each discovery source is allowed to contribute.
+
+The current direct-source register connects 12 of those 376 historical India company labels. `pipeline/company_panel.py` regenerates `data/company-panel-coverage.json` on every monthly run so source expansion is measurable rather than anecdotal.
+
+Run the discovery stage locally after registering for an authorized [Jooble API key](https://jooble.org/api/about):
+
+```bash
+JOOBLE_API_KEY=... python pipeline/discover_jooble.py --month 2026-09
+```
+
+The command writes only to `data/discovery/<month>/`; it cannot update the live report.
 
 Review workbook: [DevOps Skills Index 2026 — Corrected Semantic Pilot Review](https://docs.google.com/spreadsheets/d/1UmPSeFHqa5jeASbtyBwLz9RrP6G-mvXcUl8zex0Luno/edit)
 

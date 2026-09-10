@@ -1,0 +1,24 @@
+{
+  "jooble": [
+    {"keywords": "devops engineer", "location": "India"},
+    {"keywords": "devsecops engineer", "location": "India"},
+    {"keywords": "site reliability engineer", "location": "India"},
+    {"keywords": "platform engineer", "location": "India"},
+    {"keywords": "platform engineering", "location": "India"},
+    {"keywords": "cloud infrastructure engineer", "location": "India"},
+    {"keywords": "infrastructure automation engineer", "location": "India"},
+    {"keywords": "production engineer infrastructure", "location": "India"},
+    {"keywords": "release engineer CI/CD", "location": "India"},
+    {"keywords": "observability engineer", "location": "India"},
+    {"keywords": "kubernetes engineer", "location": "India"},
+    {"keywords": "developer productivity engineer", "location": "India"},
+    {"keywords": "developer experience platform engineer", "location": "India"},
+    {"keywords": "MLOps engineer", "location": "India"},
+    {"keywords": "LLMOps engineer", "location": "India"},
+    {"keywords": "AI platform engineer", "location": "India"},
+    {"keywords": "machine learning platform engineer", "location": "India"},
+    {"keywords": "AI infrastructure engineer", "location": "India"},
+    {"keywords": "model serving engineer", "location": "India"},
+    {"keywords": "GPU infrastructure engineer", "location": "India"}
+  ]
+}

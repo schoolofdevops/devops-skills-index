@@ -1,0 +1,26 @@
+{
+  "version": "2026-09-10",
+  "sources": [
+    {
+      "provider": "jooble",
+      "purpose": "employer and role discovery only",
+      "access_basis": "registered API key",
+      "description_evidence": "snippet only",
+      "permanent_raw_description_storage": false,
+      "derived_aggregate_publication": "requires confirmation under the registered account terms",
+      "canonical_resolution_required": true,
+      "publication_enabled": false,
+      "reviewed_on": "2026-09-10",
+      "documentation": "https://help.jooble.org/en/support/solutions/articles/60001448238-rest-api-documentation"
+    },
+    {
+      "provider": "linkedin",
+      "purpose": "manual discovery only",
+      "access_basis": "public pages viewed by a person",
+      "automated_collection": false,
+      "publication_enabled": false,
+      "reviewed_on": "2026-09-10",
+      "documentation": "https://www.linkedin.com/robots.txt"
+    }
+  ]
+}
